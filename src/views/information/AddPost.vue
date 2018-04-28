@@ -344,7 +344,7 @@ function getPost (_this) {
 
 <style lang="stylus">
 #add-post
-  hegiht auto !important
+  height auto !important
   .el-input, .el-textarea
     width 50%
   .el-textarea textarea

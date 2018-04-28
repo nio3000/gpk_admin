@@ -29,6 +29,8 @@
       upload(:callback='uploadShare', :url='form.share_url', :uploadDelete="deleteShare")
     el-form-item(label='文稿标题', prop='manuscript_title')
       el-input(v-model='form.manuscript_title')
+    //- el-form-item(label='文稿正文', prop='abstract')
+    //-   el-input(type='textarea',v-model='form.content_source')
     el-form-item(label='文稿正文', prop='content_source')
       #content_source
         smeditor(:config='smeditorConfig')
@@ -234,7 +236,11 @@ function getIftalk (_this) {
     Object.keys(_this.form).forEach(key => {
       _this.form[key] = if_talk[key] || _this.form[key]
     })
-    // _this.form.guests = if_talk.guest || []
+    _this.form.audio_id = if_talk.audio && if_talk.audio.id || ''
+    if (if_talk.manuscript) {
+      _this.form.manuscript_title = if_talk.manuscript.title
+      _this.form.content_source = if_talk.manuscript.content_source
+    }
     document.querySelector('#topic_abstract .input-area').innerHTML = _this.form.topic_abstract || ''
     document.querySelector('#content_source .input-area').innerHTML = _this.form.content_source || ''
   }).catch((err) => {
